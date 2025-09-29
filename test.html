@@ -32,7 +32,11 @@
                 if (container) {
                     const canvas = container.querySelector('canvas');
                     if (canvas) {
-                        canvas.style.backgroundColor = color;
+                        const ctx = canvas.getContext('2d');
+                        const oldColor = ctx.fillStyle;
+                        ctx.fillStyle = color;
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.fillStyle = oldColor;
                         console.log('Canvas background changed to:', color);
                         clearInterval(checkCanvas);
                     }
